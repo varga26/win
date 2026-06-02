@@ -1,0 +1,26 @@
+```yaml
+name: Run Windows WinAPI Lab
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # Дозволяє запускати сценарій вручну кнопкою
+
+jobs:
+  build-and-run:
+    runs-on: windows-latest # Виділяє хмарну машину з Windows 2022/2025
+
+    steps:
+    - name: 1. Скачування коду з репозиторію
+      uses: actions/checkout@v4
+
+    - name: 2. Компіляція та Запуск програм
+      shell: cmd # Використовуємо класичний командний рядок Windows
+      run: |
+        echo === КОМПІЛЯЦІЯ ===
+        g++ p1.cpp -o program1.exe
+        g++ p2.cpp -o p2.exe
+        
+        echo.
+        echo === ЗАПУСК ПРОГРАМИ ===
+        p2.exe
